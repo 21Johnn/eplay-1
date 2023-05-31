@@ -8,18 +8,30 @@ export const Imagem = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   font-weight: 700;
-  padding-top: 340px;
   position: relative;
 
   .container {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    position: relative;
+    z-index: 1;
+    padding-top: 340px;
   }
 
   ${TagContainer} {
     position: absolute;
     top: 32px;
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.73);
+    content: '';
   }
 `
 export const Titulo = styled.h2`
