@@ -7,14 +7,10 @@ import Button from '../Button'
 import { Game } from '../../Pages/Home'
 import { formataPreco } from '../ProductsList'
 
-const Banner = () => {
-  const [game, setGame] = useState<Game>()
+import { useGetFeaturedQuery } from '../../services/api'
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/eplay/destaque')
-      .then((res) => res.json())
-      .then((res) => setGame(res))
-  }, [])
+const Banner = () => {
+  const { data: game, isLoading } = useGetFeaturedQuery()
 
   if (!game) {
     return <h1>carregando...</h1>
