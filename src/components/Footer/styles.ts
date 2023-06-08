@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
+import { HashLink } from 'react-router-hash-link'
+
 export const Container = styled.footer`
   background-color: ${cores.cinza};
   padding: 32px 0;
+  margin-top: 40px;
 `
 export const Title = styled.h4`
   color: #fff;
@@ -17,7 +20,7 @@ export const Links = styled.ul`
   margin-top: 16px;
 `
 
-export const Link = styled.a`
+export const Link = styled(HashLink)`
   color: #a3a3a3;
   text-decoration: none;
   font-size: 14px;

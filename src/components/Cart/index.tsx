@@ -8,15 +8,16 @@ import {
   Sidebar
 } from './styles'
 
-import img from '../../assets/images/diablo.png'
 import Tag from '../Tag'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 import { formataPreco } from '../ProductsList'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
 
@@ -26,12 +27,21 @@ const Cart = () => {
 
   const getTotalPrice = () => {
     return items.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.prices.current!)
+      if (valorAtual.prices.current) {
+        return (acumulador += valorAtual.prices.current)
+      }
+
+      return 0
     }, 0)
   }
 
   const removeItem = (id: number) => {
     dispatch(remove(id))
+  }
+
+  const goToCheckout = () => {
+    navigate('/checkout')
+    closeCart()
   }
 
   return (
@@ -57,7 +67,11 @@ const Cart = () => {
           Total de {formataPreco(getTotalPrice())}{' '}
           <span>em até 6x no cartão</span>
         </Prices>
-        <Button title="clique aqui para continuar com a compra" type="button">
+        <Button
+          onClick={goToCheckout}
+          title="clique aqui para continuar com a compra"
+          type="button"
+        >
           Continuar com a compra
         </Button>
       </Sidebar>
